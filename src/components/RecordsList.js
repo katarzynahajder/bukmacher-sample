@@ -4,7 +4,7 @@ import RecordListItem from "./RecordListItem"
 class RecordList extends React.Component{
     state={
         elements:[{
-            id: '0', 
+            id: 0, 
             state: 'aaaa',
             league: 'eeee',
             schedule: '16:00',
@@ -19,19 +19,19 @@ class RecordList extends React.Component{
         total: 0
     }
     markAsWon(id){
-        const index=this.state.elements.findIndex(x=>x.id==id)
+        const index=this.state.elements.findIndex(x=>x.id===id)
         const newElements=this.state.elements
         newElements[index].state='won'
         this.setState({elements: newElements})
     }
     markAsLost(id){
-        const index=this.state.elements.findIndex(x=>x.id==id)
+        const index=this.state.elements.findIndex(x=>x.id===id)
         const newElements=this.state.elements
         newElements[index].state='lost'
         this.setState({elements: newElements})
     }
     totalProfit(id, profit){
-        const index=this.state.elements.findIndex(x=>x.id==id)
+        const index=this.state.elements.findIndex(x=>x.id===id)
         const newElements=this.state.elements
         newElements[index].profit='????'
         this.setState({
@@ -75,38 +75,44 @@ class RecordList extends React.Component{
         return(
             <div>
                 <table>
-                    <tr>
-                        <th>Liga</th>
-                        <th>Godzina</th>
-                        <th>Drużyna 1</th>
-                        <th>Drużyna 2</th>
-                        <th>Zakład</th>
-                        <th>Kurs</th>
-                        <th>Stawka</th>
-                        <th>Zysk</th>
-                    </tr>
-                    <tr>
-                        <td><input id='league' type='text' /></td>
-                        <td><input id='schedule' type='text' /></td>
-                        <td><input id='firstTeam' type='text' /></td>
-                        <td><input id='secondTeam' type='text' /></td>
-                        <td><input id='bet' type='text' /></td>
-                        <td><input id='exchange' type='number' /></td>
-                        <td><input id='bid' type='number' /></td>
-                        <td></td>
-                        <td className='card buttons'><button onClick={this.addItem.bind(this)}>Dodaj do listy</button></td>
-                        <td className='card buttons'><input type='checkbox' checked={this.state.checked} onChange={this.handleChange} />Podatek</td>
-                    </tr><br />
-                    {elements}
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td className='card' colSpan="2">Łączny zysk</td>
-                        <td className='card'>{this.state.total}</td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>Liga</th>
+                            <th>Godzina</th>
+                            <th>Drużyna 1</th>
+                            <th>Drużyna 2</th>
+                            <th>Zakład</th>
+                            <th>Kurs</th>
+                            <th>Stawka</th>
+                            <th>Zysk</th>
+                        </tr>
+                        <tr>
+                            <td><input id='league' type='text' /></td>
+                            <td><input id='schedule' type='text' /></td>
+                            <td><input id='firstTeam' type='text' /></td>
+                            <td><input id='secondTeam' type='text' /></td>
+                            <td><input id='bet' type='text' /></td>
+                            <td><input id='exchange' type='number' /></td>
+                            <td><input id='bid' type='number' /></td>
+                            <td></td>
+                            <td className='card buttons'><button onClick={this.addItem.bind(this)}>Dodaj do listy</button></td>
+                            <td className='card buttons'><input type='checkbox' checked={this.state.checked} onChange={this.handleChange} />Podatek</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {elements}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td className='card' colSpan="2">Łączny zysk</td>
+                            <td className='card'>{this.state.total}</td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         )

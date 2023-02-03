@@ -6,12 +6,12 @@ const RecordListItem=(props)=>{
     let bid=props.element.bid
     let profit='oczekujące'
     let tax=props.tax
-    if(props.element.state=='won'){
+    if(props.element.state==='won'){
         state='card '+props.element.state
         if(tax)bid*=0.88
         profit=Number(Math.round(exchange*bid+'e+2')+'e-2')}
         if(tax&&(profit>=2280))profit=Number(Math.round(profit*0.9+'e+2')+'e-2')
-    else if(props.element.state=='lost'){
+    else if(props.element.state==='lost'){
         state='card '+props.element.state
         profit=0-bid}
     return(
